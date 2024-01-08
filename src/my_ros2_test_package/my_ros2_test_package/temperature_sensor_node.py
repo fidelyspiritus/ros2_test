@@ -2,7 +2,6 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float64
 from random import uniform
-import time
 
 class TemperatureSensorNode(Node):
     def __init__(self):
