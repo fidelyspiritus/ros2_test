@@ -20,9 +20,9 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'temperature_sensor = my_sor2_test_package.temperature_sensor_node:main',
-            'light_sensor = my_sor2_test_package.light_sensor_node:main',
-            'display = my_sor2_test_package.display_node:main',
+            'temperature_sensor = my_ros2_test_package.temperature_sensor_node:main',
+            'light_sensor = my_ros2_test_package.light_sensor_node:main',
+            'display = my_ros2_test_package.display_node:main',
         ],
     },
 )

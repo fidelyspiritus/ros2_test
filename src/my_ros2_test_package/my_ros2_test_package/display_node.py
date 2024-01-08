@@ -2,9 +2,9 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float64
 
-class DisplaNode(Node):
+class DisplayNode(Node):
     def __init__(self):
-        super.__init__('display_node')
+        super().__init__('display_node')
         self.temperature_subscription = self.create_subscription(
             Float64, 
             'temperature', 
@@ -26,7 +26,7 @@ class DisplaNode(Node):
 
 def main(args = None):
     rclpy.init(args = args)
-    display_node = DisplaNode()
+    display_node = DisplayNode()
     rclpy.spin(display_node)
     rclpy.shutdown()
 
