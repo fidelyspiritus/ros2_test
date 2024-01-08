@@ -16,7 +16,7 @@ class TemperatureSensorNode(Node):
         msg = Float64()
         msg.data = temperature
         self.publisher_.publish(msg)
-        self.get_logger().info('Publishing: "%s"' % msg.data)
+        self.get_logger().info('Temperature: "%s"' % msg.data)
 
 def main(args = None):
     rclpy.init(args = args)
