@@ -1,6 +1,6 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Float64, String
+from std_msgs.msg import Float64, String, Int16
 
 class DisplayNode(Node):
     def __init__(self):
@@ -11,7 +11,7 @@ class DisplayNode(Node):
             self.temperature_callback, 
             10)
         self.light_subscription = self.create_subscription(
-            Float64,
+            Int16,
             'lightness',
             self.light_callback,
             10)

@@ -1,19 +1,19 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Float64
-from random import uniform
+from std_msgs.msg import Int16
+from random import randint
 
 
 class LightSensorNode(Node):
     def __init__(self):
         super().__init__('light_sensor')
-        self.publisher_ = self.create_publisher(Float64, 'lightness', 10)
+        self.publisher_ = self.create_publisher(Int16, 'lightness', 10)
         self.timer_period = 1.0 #seconds
         self.timer = self.create_timer(self.timer_period,self.publish_light_level)
     
     def publish_light_level(self):
-        light_level = uniform(100.0, 1000.0)
-        msg = Float64()
+        light_level = randint(100, 1000)
+        msg = Int16()
         msg.data = light_level
         self.publisher_.publish(msg)
         self.get_logger().info('Light level is %s' % msg.data)
