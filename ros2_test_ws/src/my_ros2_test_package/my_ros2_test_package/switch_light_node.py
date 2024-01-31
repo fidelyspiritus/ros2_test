@@ -1,6 +1,6 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import Float64
+from std_msgs.msg import Float64, String
 
 
 class SwitchLightNode(Node):
@@ -11,15 +11,25 @@ class SwitchLightNode(Node):
             'lightness',
             self.light_level_callback,
             10)
-        self.light_level_subscription
+        self.publisher_ = self.create_publisher(String, 'switch_light', 10)
+
         self.light_threshold = 500.0 # Уровень освещенности для включения света
+        self.timer_period = 5.0 #seconds
+        self.timer = self.create_timer(self.timer_period, self.publish_light_switch_status)
 
     def light_level_callback(self, msg):
         if msg.data is not None:
             if msg.data > self.light_threshold:
                 self.get_logger().info("Turn off the light, it's bright enough!")
             else:
-                self.get_logger().info("Turn on the light, it's too dark outside!") 
+                status = "Turn on the light, it's too dark outside!"
+        msg = String()
+        msg.data = status
+        self.publisher_.publish(msg)
+        self.get_logger().info(status)
+    
+    def light_level_callback(self,msg):
+        self.light_level = msg.data
 
 def main(args = None):
     rclpy.init(args = args)
