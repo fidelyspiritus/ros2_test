@@ -20,9 +20,16 @@ class DisplayNode(Node):
             'switch_light',
             self.switch_callback,
             10)
-        self.temperature_subscription   #to prevent unused variable warning
-        self.light_subscription
-        self.switch_light_subscription
+        self.wind_speed_subscription = self.create_subscription(
+            Int16,
+            'wind_speed',
+            self.wind_speed_callback,
+            10)
+        self.wind_direction_subscription = self.create_subscription(
+            Int16,
+            'wind_direction',
+            self.wind_direction_callback,
+            10)
 
     def temperature_callback(self, msg):
         self.get_logger().info('Temperatures: "%s" Celsius' % msg.data)
@@ -32,6 +39,13 @@ class DisplayNode(Node):
     
     def switch_callback(self,msg):
         self.get_logger().info(msg.data)  
+
+    def wind_speed_callback(self, msg):
+        self.get_logger().info(f'Wind speed: {msg.data} m/s')
+
+    def wind_direction_callback(self, msg):
+        self.get_logger().info(f'Wind direction: {msg.data} degrees')
+
 def main(args = None):
     rclpy.init(args = args)
     display_node = DisplayNode()
